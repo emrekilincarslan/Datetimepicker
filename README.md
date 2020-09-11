@@ -28,7 +28,7 @@ Step 1. Add the JitPack repository to your project level build.gradle file
 Step 2. Add the dependency  app level build.gradle file 
 
 	dependencies {
-    implementation 'com.github.emrekilincarslan:Datetimepicker:0.1.0'
+    implementation 'com.github.emrekilincarslan:Datetimepicker:0.1.1-alpha'
   }
   
   Thats It !!!
