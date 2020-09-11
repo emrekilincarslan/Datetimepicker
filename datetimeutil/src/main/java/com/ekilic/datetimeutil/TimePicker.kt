@@ -15,6 +15,10 @@ class TimePicker @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
+    private var mRealYear: Int=0
+    private var mRealMonth: Int=0
+    private var mRealDay: Int=0
+
     // state
     var mCurrentHour = 0 // 0-23
     private var mCurrentMinute = 0 // 0-59
@@ -50,21 +54,29 @@ class TimePicker @JvmOverloads constructor(
         fun onTimeChanged(view: TimePicker?, hourOfDay: Int, minute: Int)
     }
 
-    fun limitMinutesIfNeeded(newVal: Int, cal: Calendar) {
-        if (mSelectedyear == cal[Calendar.YEAR] &&
-            mSelectedMonth == cal[Calendar.MONTH] &&
-            mSelectedDate == cal[Calendar.DAY_OF_MONTH]
-        ) {
-            if (newVal == mRealHour) {
+    private fun isItTodaySelected():Boolean{
+        return mSelectedyear == mRealYear &&
+                mSelectedMonth == mRealMonth &&
+                mSelectedDate == mRealDay
+    }
+
+    fun limitHourAndMinutesIfNeeded(selectedHour: Int ) {
+        if ( isItTodaySelected() ) {
+            mHourPicker.minValue=mRealHour
+            mCurrentHour = mRealHour
+
+            if (selectedHour <= mRealHour) {
                 mMinutePicker.minValue = mRealMinute
                 mCurrentMinute = mRealMinute
             } else {
                 mMinutePicker.minValue = 0
             }
+
         } else {
             mMinutePicker.minValue = 0
+            mHourPicker.minValue=0
+            mCurrentHour = selectedHour
         }
-        mCurrentHour = newVal
         onTimeChanged()
     }
 
@@ -187,12 +199,13 @@ class TimePicker @JvmOverloads constructor(
 
         // hour
         mHourPicker = findViewById<View>(R.id.hour) as NumberPicker
-        mHourPicker.wrapSelectorWheel = false;
+
+        mHourPicker.wrapSelectorWheel = false
 
 
         // digits of minute
         mMinutePicker = findViewById<View>(R.id.minute) as NumberPicker
-        mMinutePicker.wrapSelectorWheel = false;
+        mMinutePicker.wrapSelectorWheel = false
         mMinutePicker.minValue = 0
         mMinutePicker.maxValue = 59
         mMinutePicker.setFormatter(TWO_DIGIT_FORMATTER)
@@ -201,20 +214,26 @@ class TimePicker @JvmOverloads constructor(
             onTimeChanged()
         }
 
-
         // initialize to current time
         val cal = Calendar.getInstance()
         setOnTimeChangedListener(NO_OP_CHANGE_LISTENER)
         mRealHour = cal[Calendar.HOUR_OF_DAY]
-        mRealMinute = cal[Calendar.MINUTE]
-        mSelectedyear = cal[Calendar.YEAR]
-        mSelectedMonth = cal[Calendar.MONTH]
-        mSelectedDate = cal[Calendar.DAY_OF_MONTH]
         currentHour = mRealHour
+
+        mRealMinute = cal[Calendar.MINUTE]
         currentMinute = mRealMinute
+
+        mSelectedyear = cal[Calendar.YEAR]
+        mRealYear = mSelectedyear
+        mSelectedMonth = cal[Calendar.MONTH]
+        mRealMonth = mSelectedMonth
+        mSelectedDate = cal[Calendar.DAY_OF_MONTH]
+        mRealDay = mSelectedDate
+
+
         mMinutePicker.minValue = mRealMinute
-        mHourPicker.setOnValueChangedListener { _, _, newVal ->
-            limitMinutesIfNeeded(newVal, cal)
+        mHourPicker.setOnValueChangedListener { _, _, hour ->
+            limitHourAndMinutesIfNeeded(hour)
         }
         configureHourPickerRanges()
         if (!isEnabled) {

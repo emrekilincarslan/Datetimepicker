@@ -58,9 +58,9 @@ class DateTimePickDialog(
         )
     }
 
-    private var selectedYear: Int=0
-    private var selectedDate: Int=0
-    private var selectedMonth: Int=0
+    private var selectedYear: Int = 0
+    private var selectedDate: Int = 0
+    private var selectedMonth: Int = 0
 
     private var mButtonCancel: Button
     private var mButtonDone: Button
@@ -121,10 +121,10 @@ class DateTimePickDialog(
         mInitialHourOfDay = hourOfDay
         mInitialMinute = minute
         mDateFormat = android.text.format.DateFormat.getTimeFormat(context)
-        selectedDate=calendar.get(Calendar.DAY_OF_MONTH)
-        selectedMonth=calendar.get(Calendar.MONTH)
-        selectedYear=calendar.get(Calendar.YEAR)
-        val view: View = View.inflate(context,R.layout.time_picker_dialog ,null)
+        selectedDate = calendar.get(Calendar.DAY_OF_MONTH)
+        selectedMonth = calendar.get(Calendar.MONTH)
+        selectedYear = calendar.get(Calendar.YEAR)
+        val view: View = View.inflate(context, R.layout.time_picker_dialog, null)
 
         setView(view)
         mTimePicker = view.findViewById<View>(R.id.timePicker) as TimePicker
@@ -138,7 +138,7 @@ class DateTimePickDialog(
             mTimePicker.mSelectedyear = year
             mTimePicker.mSelectedMonth = month
             mTimePicker.mSelectedDate = date
-            mTimePicker.limitMinutesIfNeeded(mTimePicker.mCurrentHour,calendar)
+            mTimePicker.limitHourAndMinutesIfNeeded(mTimePicker.mCurrentHour)
         }
 
 
@@ -156,7 +156,6 @@ class DateTimePickDialog(
     }
 
 
-
     override fun onClick(_btn: View?) {
         if (mCallback != null) {
             mTimePicker.clearFocus()
@@ -164,8 +163,8 @@ class DateTimePickDialog(
                 mTimePicker,
                 mTimePicker.currentHour,
                 mTimePicker.currentMinute,
-               selectedYear,
-                selectedMonth,
+                selectedYear,
+                selectedMonth+1,
                 selectedDate
             )
         }
