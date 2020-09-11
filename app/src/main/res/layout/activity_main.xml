@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#345"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textColor="#cecece"/>
+
+    <Button android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/time_set"
+        android:layout_marginTop="70dp"
+        android:onClick="showPicker"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:text="@string/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#cecece"/>
+
+
+
+</LinearLayout>
