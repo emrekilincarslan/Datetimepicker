@@ -1,8 +1,8 @@
 # Datetimepicker
 
-[![N|Solid](https://i.imgur.com/U3zTNa7.gif)](https://nodesource.com/products/nsolid)
+[![N|Solid](https://i.imgur.com/WagyObQ.gif)](https://nodesource.com/products/nsolid)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/emrekilincarslan/Datetimepicker)
+[![](https://jitpack.io/v/emrekilincarslan/Datetimepicker.svg)](https://jitpack.io/#emrekilincarslan/Datetimepicker)
 
 DateTimePicker is a cool dialog for getting date and time at the same time 
   - Easy To use
@@ -28,7 +28,7 @@ Step 1. Add the JitPack repository to your project level build.gradle file
 Step 2. Add the dependency  app level build.gradle file 
 
 	dependencies {
-    implementation 'com.github.emrekilincarslan:Datetimepicker:0.1.0'
+    implementation 'com.github.emrekilincarslan:Datetimepicker:<latest-version>'
   }
   
   Thats It !!!
