@@ -7,10 +7,11 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
     >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    >
 
         <CalendarView
             android:id="@+id/mycalendarview"
@@ -20,6 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <com.ekilic.datetimeutil.TimePicker
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
@@ -27,7 +29,7 @@
             android:layout_gravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mycalendarview"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
             />
         <Button
             android:id="@+id/btn_cancel"
@@ -40,20 +42,26 @@
             android:textColor="@color/design_default_color_secondary_variant"
             android:text="@string/cancel"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginTop="15dp"
             />
         <Button
             android:id="@+id/btn_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/timePicker"
+            app:layout_constraintTop_toTopOf="@id/btn_cancel"
             app:layout_constraintStart_toEndOf="@id/btn_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/done"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginTop="15dp"
             android:textColor="@color/design_default_color_secondary_variant"
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="311dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
